@@ -1,0 +1,16 @@
+flight_id,route_id,flight_number,airline,departure_time,arrival_time,flight_date,status,gate_assigned,passenger_capacity,checkin_count,boarding_count,delay_mins,priority_level
+FL001,R001,AI-101,Air India,06:00,09:00,2026-06-25,On Time,G1,200,150,130,0,1
+FL002,R001,6E-205,IndiGo,08:30,11:30,2026-06-25,Delayed,G2,180,140,110,30,2
+FL003,R003,UK-845,Vistara,07:15,10:30,2026-06-25,On Time,G3,220,200,180,0,1
+FL004,R006,AI-102,Air India,09:00,10:45,2026-06-25,Boarding,G4,160,150,140,0,1
+FL005,R009,6E-312,IndiGo,10:30,11:45,2026-06-25,On Time,G5,180,120,100,0,2
+FL006,R011,UK-456,Vistara,11:00,12:30,2026-06-25,Check-in,G1,200,80,50,15,2
+FL007,R001,AI-201,Air India,12:00,15:00,2026-06-25,On Time,G2,200,170,160,0,1
+FL008,R004,6E-410,IndiGo,13:30,16:45,2026-06-25,Scheduled,G6,180,60,20,0,3
+FL009,R017,UK-789,Vistara,14:00,17:30,2026-06-25,Scheduled,G7,220,90,30,0,2
+FL010,R002,AI-303,Air India,15:00,18:15,2026-06-25,Scheduled,G3,200,100,40,0,1
+FL011,R006,6E-515,IndiGo,16:30,18:15,2026-06-25,Scheduled,G8,160,70,25,0,2
+FL012,R013,UK-234,Vistara,17:00,18:15,2026-06-25,Scheduled,G4,180,50,15,0,3
+FL013,R001,AI-404,Air India,18:00,21:00,2026-06-25,Scheduled,G1,200,30,10,0,1
+FL014,R003,6E-620,IndiGo,19:00,22:15,2026-06-25,Scheduled,G5,180,20,5,0,2
+FL015,R009,UK-567,Vistara,20:00,21:15,2026-06-25,Scheduled,G2,160,10,0,0,3

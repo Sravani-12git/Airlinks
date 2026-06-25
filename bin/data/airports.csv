@@ -1,0 +1,6 @@
+airport_id,airport_name,city,state,country,latitude,longitude,timezone,terminal_count,gates_count
+AP001,Indira Gandhi International Airport,Delhi,Delhi,India,28.5562,77.1000,IST,3,120
+AP002,Chhatrapati Shivaji Maharaj International Airport,Mumbai,Maharashtra,India,19.0887,72.8679,IST,2,100
+AP003,Kempegowda International Airport,Bangalore,Karnataka,India,13.1979,77.7065,IST,1,80
+AP004,Rajiv Gandhi International Airport,Hyderabad,Telangana,India,17.2313,78.4299,IST,1,75
+AP005,Chennai International Airport,Chennai,Tamil Nadu,India,12.9822,80.1635,IST,1,60
