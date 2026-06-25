@@ -1,4 +1,4 @@
-passenger_id,flight_id,first_name,last_name,age,gender,nationality,ticket_number,seat_number,checkin_time,boarding_time,luggage_weight,class_type,passenger_type,frequent_flyer
+passenger_id,flight_id,first_name,last_name,age,gender,nationality,seat_number,checkin_time,luggage_weight,class_type,passenger_type,frequent_flyer
 P1001,FL001,Raj,Sharma,45,M,Indian,TKT-2026-001,12A,05:30,05:45,25,Economy,Regular,Gold
 P1002,FL001,Priya,Patel,32,F,Indian,TKT-2026-002,12B,05:35,05:50,20,Economy,Regular,Silver
 P1003,FL001,Vikram,Singh,28,M,Indian,TKT-2026-003,14C,05:40,06:00,28,Business,Regular,Platinum

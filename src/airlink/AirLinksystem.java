@@ -73,7 +73,7 @@ public class AirLinksystem {
 
     public void showSystemInfo() {
         System.out.println("\n╔══════════════════════════════════════════╗");
-        System.out.println("║     AirLink System Information          ║");
+        System.out.println("║     AirLink System Information           ║");
         System.out.println("╚══════════════════════════════════════════╝");
         System.out.println("  Total Airports        : " + airports.size());
         System.out.println("  Total Routes          : " + routes.size());
@@ -91,7 +91,7 @@ public class AirLinksystem {
     public void showMainMenu() {
         while (true) {
             System.out.println("\n╔══════════════════════════════════════════════════════════╗");
-            System.out.println("║               AIRLINK SYSTEM - MAIN MENU                ║");
+            System.out.println("║               AIRLINK SYSTEM - MAIN MENU                 ║");
             System.out.println("╚══════════════════════════════════════════════════════════╝");
             System.out.println("  1. Flight Management");
             System.out.println("  2. Passenger Management");
@@ -126,7 +126,7 @@ public class AirLinksystem {
     private void flightManagementMenu() {
         while (true) {
             System.out.println("\n╔══════════════════════════════════════════════════════════╗");
-            System.out.println("║              FLIGHT MANAGEMENT                          ║");
+            System.out.println("║              FLIGHT MANAGEMENT                           ║");
             System.out.println("╚══════════════════════════════════════════════════════════╝");
             System.out.println("  1. Search Flight by ID");
             System.out.println("  2. View All Flights");
@@ -338,7 +338,7 @@ public class AirLinksystem {
     private void passengerManagementMenu() {
         while (true) {
             System.out.println("\n╔══════════════════════════════════════════════════════════╗");
-            System.out.println("║            PASSENGER MANAGEMENT                        ║");
+            System.out.println("║            PASSENGER MANAGEMENT                          ║");
             System.out.println("╚══════════════════════════════════════════════════════════╝");
             System.out.println("  1. Search Passenger by ID");
             System.out.println("  2. View All Passengers");
@@ -561,7 +561,7 @@ public class AirLinksystem {
     private void airportManagementMenu() {
         while (true) {
             System.out.println("\n╔══════════════════════════════════════════════════════════╗");
-            System.out.println("║          AIRPORT & ROUTE MANAGEMENT                     ║");
+            System.out.println("║          AIRPORT & ROUTE MANAGEMENT                      ║");
             System.out.println("╚══════════════════════════════════════════════════════════╝");
             System.out.println("  1. View All Airports");
             System.out.println("  2. View Routes from Airport");
@@ -705,7 +705,7 @@ public class AirLinksystem {
     private void graphAnalysisMenu() {
         while (true) {
             System.out.println("\n╔══════════════════════════════════════════════════════════╗");
-            System.out.println("║        GRAPH & SHORTEST PATH ANALYSIS                   ║");
+            System.out.println("║        GRAPH & SHORTEST PATH ANALYSIS                    ║");
             System.out.println("╚══════════════════════════════════════════════════════════╝");
             System.out.println("  1. Find Shortest Path (Dijkstra)");
             System.out.println("  2. Find Shortest Path (Bellman-Ford)");
@@ -873,7 +873,7 @@ public class AirLinksystem {
     private void sortingAnalyticsMenu() {
         while (true) {
             System.out.println("\n╔══════════════════════════════════════════════════════════╗");
-            System.out.println("║           SORTING & ANALYTICS                           ║");
+            System.out.println("║           SORTING & ANALYTICS                            ║");
             System.out.println("╚══════════════════════════════════════════════════════════╝");
             System.out.println("  1. Sort Flights by Departure (Merge Sort)");
             System.out.println("  2. Sort Flights by Delay (Quick Sort)");
@@ -1112,7 +1112,7 @@ public class AirLinksystem {
     private void optimizationMenu() {
         while (true) {
             System.out.println("\n╔══════════════════════════════════════════════════════════╗");
-            System.out.println("║           OPTIMIZATION ALGORITHMS                       ║");
+            System.out.println("║           OPTIMIZATION ALGORITHMS                        ║");
             System.out.println("╚══════════════════════════════════════════════════════════╝");
             System.out.println("  1. Gate Allocation (Activity Selection)");
             System.out.println("  2. Cargo Optimization (Fractional Knapsack)");
@@ -1303,8 +1303,8 @@ public class AirLinksystem {
     
     public static void main(String[] args) {
         System.out.println("╔══════════════════════════════════════════════════════════╗");
-        System.out.println("║            AIRLINK SYSTEM v2.0                         ║");
-        System.out.println("║     Smart Airport Operations & Flight Management       ║");
+        System.out.println("║            AIRLINK SYSTEM v2.0                           ║");
+        System.out.println("║     Smart Airport Operations & Flight Management         ║");
         System.out.println("╚══════════════════════════════════════════════════════════╝");
         
         AirLinksystem system = new AirLinksystem();
@@ -1313,3 +1313,19 @@ public class AirLinksystem {
         system.showMainMenu();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
