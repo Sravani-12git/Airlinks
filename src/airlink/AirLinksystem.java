@@ -310,8 +310,11 @@ public class AirLinksystem {
         flights.add(newFlight);
         flightIndex.insert(flightId, newFlight);
         scheduleIndex.insert(depTime, newFlight);
-        
+
+        DatabaseManager.insertFlight(newFlight);
+
         System.out.println("  ✓ Flight added successfully!");
+        System.out.println("  ✓ Saved to PostgreSQL!");
     }
 
     private void updateFlightStatus() {
@@ -552,8 +555,11 @@ public class AirLinksystem {
         
         passengers.add(newPassenger);
         passengerIndex.insert(passengerId, newPassenger);
-        
+
+        DatabaseManager.insertPassenger(newPassenger);
+
         System.out.println("  ✓ Passenger added successfully!");
+        System.out.println("  ✓ Saved to PostgreSQL!");
     }
 
     // ==================== AIRPORT MANAGEMENT ====================
