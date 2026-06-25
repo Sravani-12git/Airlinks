@@ -23,6 +23,10 @@ public class BPlusTree<K extends Comparable<K>, V> {
         return map.get(key);
     }
 
+    public void delete(K key){
+        map.remove(key);
+    }
+
     public List<K> rangeQuery(K start, K end){
         return new ArrayList<>(map.subMap(start,true,end,true).keySet());
     }

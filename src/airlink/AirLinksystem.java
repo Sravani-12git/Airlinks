@@ -134,10 +134,11 @@ public class AirLinksystem {
             System.out.println("  4. View Flights by Airline");
             System.out.println("  5. View Flights by Status");
             System.out.println("  6. Add New Flight");
-            System.out.println("  7. Update Flight Status");
-            System.out.println("  8. Back to Main Menu");
+            System.out.println("  7. Update Flight Details");
+            System.out.println("  8. Delete Flight");
+            System.out.println("  9. Back to Main Menu");
             System.out.println("═══════════════════════════════════════════════════════════");
-            System.out.print("  Enter your choice (1-8): ");
+            System.out.print("  Enter your choice (1-9): ");
             
             int choice = getIntInput();
             switch (choice) {
@@ -147,8 +148,9 @@ public class AirLinksystem {
                 case 4: viewFlightsByAirline(); break;
                 case 5: viewFlightsByStatus(); break;
                 case 6: addNewFlight(); break;
-                case 7: updateFlightStatus(); break;
-                case 8: return;
+                case 7: updateFlightDetails(); break;
+                case 8: deleteFlight(); break;
+                case 9: return;
                 default: System.out.println("✗ Invalid choice.");
             }
         }
@@ -317,7 +319,7 @@ public class AirLinksystem {
         System.out.println("  ✓ Saved to PostgreSQL!");
     }
 
-    private void updateFlightStatus() {
+    private void updateFlightDetails() {
         System.out.print("\n  Enter Flight ID to update: ");
         String flightId = scanner.nextLine().trim().toUpperCase();
         Flight flight = flightIndex.search(flightId);
@@ -331,9 +333,47 @@ public class AirLinksystem {
         System.out.println("  Available Status: On Time, Delayed, Boarding, Check-in, Scheduled, Cancelled");
         System.out.print("  New Status: ");
         String newStatus = scanner.nextLine().trim();
+        System.out.print("  New Gate: ");
+        String newGate = scanner.nextLine().trim();
+        System.out.print("  New Delay Minutes: ");
+        int newDelay = getIntInput();
+        System.out.print("  New Priority Level: ");
+        int newPriority = getIntInput();
         
         flight.setStatus(newStatus);
-        System.out.println("  ✓ Flight status updated to: " + newStatus);
+        flight.setGateAssigned(newGate);
+        flight.setDelayMins(newDelay);
+        flight.setPriorityLevel(newPriority);
+
+        boolean saved = DatabaseManager.updateFlight(flight);
+        if (saved) {
+            System.out.println("  ✓ Flight updated successfully!");
+            System.out.println("  ✓ Updated in PostgreSQL!");
+        } else {
+            System.out.println("  ✗ Flight update failed in PostgreSQL.");
+        }
+    }
+
+    private void deleteFlight() {
+        System.out.print("\n  Enter Flight ID to delete: ");
+        String flightId = scanner.nextLine().trim().toUpperCase();
+        Flight flight = flightIndex.search(flightId);
+
+        if (flight == null) {
+            System.out.println("  ✗ Flight not found!");
+            return;
+        }
+
+        boolean deleted = DatabaseManager.deleteFlight(flightId);
+        if (deleted) {
+            flights.remove(flight);
+            flightIndex.delete(flightId);
+            scheduleIndex.delete(flight.getDepartureTime().toString());
+            System.out.println("  ✓ Flight deleted successfully!");
+            System.out.println("  ✓ Removed from PostgreSQL!");
+        } else {
+            System.out.println("  ✗ Flight deletion failed in PostgreSQL.");
+        }
     }
 
     // ==================== PASSENGER MANAGEMENT ====================
@@ -350,9 +390,11 @@ public class AirLinksystem {
             System.out.println("  5. View Senior Citizens");
             System.out.println("  6. View Frequent Flyers");
             System.out.println("  7. Add New Passenger");
-            System.out.println("  8. Back to Main Menu");
+            System.out.println("  8. Update Passenger");
+            System.out.println("  9. Delete Passenger");
+            System.out.println("  10. Back to Main Menu");
             System.out.println("═══════════════════════════════════════════════════════════");
-            System.out.print("  Enter your choice (1-8): ");
+            System.out.print("  Enter your choice (1-10): ");
             
             int choice = getIntInput();
             switch (choice) {
@@ -363,7 +405,9 @@ public class AirLinksystem {
                 case 5: viewSeniorCitizens(); break;
                 case 6: viewFrequentFlyers(); break;
                 case 7: addNewPassenger(); break;
-                case 8: return;
+                case 8: updatePassenger(); break;
+                case 9: deletePassenger(); break;
+                case 10: return;
                 default: System.out.println("✗ Invalid choice.");
             }
         }
@@ -562,6 +606,69 @@ public class AirLinksystem {
         System.out.println("  ✓ Saved to PostgreSQL!");
     }
 
+    private void updatePassenger() {
+        System.out.print("\n  Enter Passenger ID to update: ");
+        String passengerId = scanner.nextLine().trim().toUpperCase();
+        Passenger passenger = passengerIndex.search(passengerId);
+
+        if (passenger == null) {
+            System.out.println("  ✗ Passenger not found!");
+            return;
+        }
+
+        System.out.print("  New Flight ID: ");
+        String flightId = scanner.nextLine().trim().toUpperCase();
+        System.out.print("  New First Name: ");
+        String firstName = scanner.nextLine().trim();
+        System.out.print("  New Last Name: ");
+        String lastName = scanner.nextLine().trim();
+        System.out.print("  New Age: ");
+        int age = getIntInput();
+        System.out.print("  New Seat Number: ");
+        String seatNumber = scanner.nextLine().trim();
+        System.out.print("  New Class: ");
+        String classType = scanner.nextLine().trim();
+        System.out.print("  New Frequent Flyer: ");
+        String frequentFlyer = scanner.nextLine().trim();
+
+        passenger.setFlightId(flightId);
+        passenger.setFirstName(firstName);
+        passenger.setLastName(lastName);
+        passenger.setAge(age);
+        passenger.setSeatNumber(seatNumber);
+        passenger.setClassType(classType);
+        passenger.setFrequentFlyer(frequentFlyer);
+
+        boolean saved = DatabaseManager.updatePassenger(passenger);
+        if (saved) {
+            System.out.println("  ✓ Passenger updated successfully!");
+            System.out.println("  ✓ Updated in PostgreSQL!");
+        } else {
+            System.out.println("  ✗ Passenger update failed in PostgreSQL.");
+        }
+    }
+
+    private void deletePassenger() {
+        System.out.print("\n  Enter Passenger ID to delete: ");
+        String passengerId = scanner.nextLine().trim().toUpperCase();
+        Passenger passenger = passengerIndex.search(passengerId);
+
+        if (passenger == null) {
+            System.out.println("  ✗ Passenger not found!");
+            return;
+        }
+
+        boolean deleted = DatabaseManager.deletePassenger(passengerId);
+        if (deleted) {
+            passengers.remove(passenger);
+            passengerIndex.delete(passengerId);
+            System.out.println("  ✓ Passenger deleted successfully!");
+            System.out.println("  ✓ Removed from PostgreSQL!");
+        } else {
+            System.out.println("  ✗ Passenger deletion failed in PostgreSQL.");
+        }
+    }
+
     // ==================== AIRPORT MANAGEMENT ====================
     
     private void airportManagementMenu() {
@@ -574,9 +681,12 @@ public class AirLinksystem {
             System.out.println("  3. View Airport Details");
             System.out.println("  4. View All Routes");
             System.out.println("  5. View High Demand Routes");
-            System.out.println("  6. Back to Main Menu");
+            System.out.println("  6. Add New Route");
+            System.out.println("  7. Update Route");
+            System.out.println("  8. Delete Route");
+            System.out.println("  9. Back to Main Menu");
             System.out.println("═══════════════════════════════════════════════════════════");
-            System.out.print("  Enter your choice (1-6): ");
+            System.out.print("  Enter your choice (1-9): ");
             
             int choice = getIntInput();
             switch (choice) {
@@ -585,7 +695,10 @@ public class AirLinksystem {
                 case 3: viewAirportDetails(); break;
                 case 4: viewAllRoutes(); break;
                 case 5: viewHighDemandRoutes(); break;
-                case 6: return;
+                case 6: addNewRoute(); break;
+                case 7: updateRoute(); break;
+                case 8: deleteRoute(); break;
+                case 9: return;
                 default: System.out.println("✗ Invalid choice.");
             }
         }
@@ -704,6 +817,107 @@ public class AirLinksystem {
         }
         System.out.println("  " + "-".repeat(70));
         System.out.println("  Total: " + count + " high demand routes");
+    }
+
+    private void addNewRoute() {
+        System.out.println("\n  === Add New Route ===");
+        System.out.print("  Route ID: ");
+        String routeId = scanner.nextLine().trim().toUpperCase();
+        System.out.print("  Source Airport ID: ");
+        String source = scanner.nextLine().trim().toUpperCase();
+        System.out.print("  Destination Airport ID: ");
+        String destination = scanner.nextLine().trim().toUpperCase();
+        System.out.print("  Distance (km): ");
+        double distance = getDoubleInput();
+        System.out.print("  Base Cost (USD): ");
+        double baseCost = getDoubleInput();
+        System.out.print("  Flight Duration (mins): ");
+        int duration = getIntInput();
+        System.out.print("  Fuel Cost (USD): ");
+        double fuelCost = getDoubleInput();
+        System.out.print("  Crew Cost (USD): ");
+        double crewCost = getDoubleInput();
+        System.out.print("  Maintenance Cost (USD): ");
+        double maintenanceCost = getDoubleInput();
+        System.out.print("  Total Cost (USD): ");
+        double totalCost = getDoubleInput();
+        System.out.print("  Demand Level (High/Medium/Low): ");
+        String demand = scanner.nextLine().trim();
+
+        Route newRoute = new Route(routeId, source, destination, distance, baseCost, duration,
+                fuelCost, crewCost, maintenanceCost, totalCost, demand);
+        routes.add(newRoute);
+        DatabaseManager.insertRoute(newRoute);
+        System.out.println("  ✓ Route added successfully!");
+        System.out.println("  ✓ Saved to PostgreSQL!");
+    }
+
+    private void updateRoute() {
+        System.out.print("\n  Enter Route ID to update: ");
+        String routeId = scanner.nextLine().trim().toUpperCase();
+        Route route = null;
+        for (Route r : routes) {
+            if (r.getRouteId().equals(routeId)) {
+                route = r;
+                break;
+            }
+        }
+
+        if (route == null) {
+            System.out.println("  ✗ Route not found!");
+            return;
+        }
+
+        System.out.print("  New Source Airport ID: ");
+        String source = scanner.nextLine().trim().toUpperCase();
+        System.out.print("  New Destination Airport ID: ");
+        String destination = scanner.nextLine().trim().toUpperCase();
+        System.out.print("  New Distance (km): ");
+        double distance = getDoubleInput();
+        System.out.print("  New Total Cost (USD): ");
+        double totalCost = getDoubleInput();
+        System.out.print("  New Demand Level: ");
+        String demand = scanner.nextLine().trim();
+
+        route.setSourceAirportId(source);
+        route.setDestAirportId(destination);
+        route.setDistanceKm(distance);
+        route.setTotalCostUsd(totalCost);
+        route.setDemandLevel(demand);
+
+        boolean saved = DatabaseManager.updateRoute(route);
+        if (saved) {
+            System.out.println("  ✓ Route updated successfully!");
+            System.out.println("  ✓ Updated in PostgreSQL!");
+        } else {
+            System.out.println("  ✗ Route update failed in PostgreSQL.");
+        }
+    }
+
+    private void deleteRoute() {
+        System.out.print("\n  Enter Route ID to delete: ");
+        String routeId = scanner.nextLine().trim().toUpperCase();
+        Route route = null;
+        for (Route r : routes) {
+            if (r.getRouteId().equals(routeId)) {
+                route = r;
+                break;
+            }
+        }
+
+        if (route == null) {
+            System.out.println("  ✗ Route not found!");
+            return;
+        }
+
+        boolean deleted = DatabaseManager.deleteRoute(routeId);
+        if (deleted) {
+            routes.remove(route);
+            System.out.println("  ✓ Route deleted successfully!");
+            System.out.println("  ✓ Removed from PostgreSQL!");
+        } else {
+            System.out.println("  ✗ Route deletion failed in PostgreSQL.");
+        }
     }
 
     // ==================== GRAPH & SHORTEST PATH ====================
